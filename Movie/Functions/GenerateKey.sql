@@ -1,0 +1,8 @@
+﻿CREATE FUNCTION [dbo].[GenerateKey]()
+RETURNS NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @key NVARCHAR(50);
+	SET @key = 'Aragorn25Goku123Voltron12';
+	RETURN @key;
+END

@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[Notice]
+(
+	[IdNotice] INT NOT NULL IDENTITY (1,1),
+	[Content] NVARCHAR (1000) NOT NULL,
+	[DateNotice] DATE NOT NULL DEFAULT GETDATE(),
+	[IsActive] BIT NOT NULL DEFAULT 1,
+	[IdMovie] INT NOT NULL,
+	[IdUsers] INT NULL,
+	CONSTRAINT PK_Notice PRIMARY KEY (IdNotice),
+	CONSTRAINT FK_Notice_Movie FOREIGN KEY (IdMovie) REFERENCES Movie (IdMovie),
+	CONSTRAINT FK_Norice_Users FOREIGN KEY (IdUsers) REFERENCES Users (Id)
+	ON DELETE SET NULL
+)
