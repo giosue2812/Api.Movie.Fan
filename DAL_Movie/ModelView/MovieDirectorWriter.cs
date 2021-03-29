@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL_Movie.Entities
+namespace DAL_Movie.ModelView
 {
     /// <summary>
-    /// Class to describe a movie
+    /// Class to describe a MovieDirectorWriter
     /// </summary>
-    public class Movie:IEntity<int>
+    public class MovieDirectorWriter : IEntity<int>
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int YearRelease { get; set; }
         public string Synopsis { get; set; }
-        public int Director { get; set; }
-        public int Writer { get; set; } 
+        public int YearRelease { get; set; }
+        public string Director { get; set; }
+        public string Writer { get; set; }
     }
 }

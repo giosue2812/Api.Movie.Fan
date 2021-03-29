@@ -1,3 +1,7 @@
+using Client.Services;
+using DAL_Movie.Repositories;
+using DAL = DAL_Movie.Entities;
+using DAL_Movie.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +31,8 @@ namespace Api.Movie.Fan.BackEnd.Core
         {
 
             services.AddControllers();
+            services.AddSingleton<IMovieService, MovieService>();
+            services.AddSingleton<IMovieRepository, MovieRepositry>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api.Movie.Fan.BackEnd.Core", Version = "v1" });

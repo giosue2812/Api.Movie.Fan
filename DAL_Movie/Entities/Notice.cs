@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL_Movie.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace DAL_Movie.Entities
     /// <summary>
     /// Class to describe a Notice related to a movie and user
     /// </summary>
-    public class Notice
+    public class Notice:IEntity<int>
     {
-        public int IdNotice { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
         public DateTime DateNotice { get; set; }
         public bool IsActive { get; set; }

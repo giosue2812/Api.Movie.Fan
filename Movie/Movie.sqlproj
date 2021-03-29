@@ -66,7 +66,6 @@
     <Folder Include="Procedures\Admin" />
     <Folder Include="Views" />
     <Folder Include="Views\Movie" />
-    <Folder Include="Views\Casting" />
     <Folder Include="Views\User" />
     <Folder Include="Views\Notice" />
   </ItemGroup>
@@ -93,11 +92,10 @@
     <Build Include="Procedures\Admin\ActiveAdmin.sql" />
     <Build Include="Procedures\Admin\BannedUser.sql" />
     <Build Include="Procedures\Admin\ReactiveUser.sql" />
-    <Build Include="Views\Movie\V_Complete_List_Film_With_Director_Writer.sql" />
-    <Build Include="Views\Movie\V_Short_List_Film.sql" />
-    <Build Include="Views\Movie\V_Film_Detail.sql" />
-    <Build Include="Views\Casting\V_Casting_Of_Film.sql" />
+    <Build Include="Views\Movie\V_Movies.sql" />
     <Build Include="Views\User\V_User_List.sql" />
     <Build Include="Views\Notice\V_Notice.sql" />
+    <Build Include="Views\Movie\Movie_With_Dirctor_Writer_Name.sql" />
+    <Build Include="Views\Movie\Movie_Casting.sql" />
   </ItemGroup>
 </Project>

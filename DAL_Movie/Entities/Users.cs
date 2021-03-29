@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL_Movie.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DAL_Movie.Entities
     /// <summary>
     /// User class to describe an User
     /// </summary>
-    public class Users
+    public class Users:IEntity<int>
     {
         public int Id { get; set; }
         public string Email { get; set; }

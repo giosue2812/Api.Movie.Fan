@@ -7,6 +7,7 @@
 	@Writer int
 AS
 BEGIN
+	SET NOCOUNT ON;
 	IF((SELECT [IdMovie] FROM [dbo].[Movie] WHERE [IdMovie] = @IdMovie) IS NULL) RETURN NULL
 	UPDATE [dbo].[Movie] 
 	SET 
