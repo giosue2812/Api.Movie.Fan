@@ -1,5 +1,5 @@
 ﻿using DAL_Movie.Entities;
-using DAL_Movie.ModelView;
+using DAL_Movie.ModelView.Movie;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,7 +19,7 @@ namespace DAL_Movie.Mappers
         /// </summary>
         /// <param name="record">IDataRecord</param>
         /// <returns>Movie</returns>
-        public static Movie ToMovies(this IDataRecord record)
+        public static Movie ToDalMovie(this IDataRecord record)
         {
             if (record == null) return null;
             return new Movie()
@@ -37,7 +37,7 @@ namespace DAL_Movie.Mappers
         /// </summary>
         /// <param name="record">IDataRecord</param>
         /// <returns>MovieDirectorWriter</returns>
-        public static MovieDirectorWriter ToMovieDirectorWriter(this IDataRecord record)
+        public static MovieDirectorWriter ToDalMovieDirectorWriter(this IDataRecord record)
         {
             if (record == null) return null;
             return new MovieDirectorWriter()
@@ -55,12 +55,11 @@ namespace DAL_Movie.Mappers
         /// </summary>
         /// <param name="record"></param>
         /// <returns>MovieCasting</returns>
-        public static MovieCasting ToMovieCasting(this IDataRecord record)
+        public static MovieCasting ToDalMovieCasting(this IDataRecord record)
         {
             if (record == null) return null;
             return new MovieCasting()
             {
-                Title = (string)record["Title"],
                 Actor = (string)record["Actor"],
                 Role = (string)record["Role"]
             };

@@ -1,5 +1,5 @@
 ﻿using DAL_Movie.Entities;
-using DAL_Movie.ModelView;
+using DAL_Movie.ModelView.Movie;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,15 +26,15 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <returns>MovieDirectorWriter</returns>
         MovieDirectorWriter GetMovieDirectorWriter(int id);
         /// <summary>
-        /// Function to return an IEnumerable of MovieCasting
-        /// </summary>
-        /// <returns>IEnumerable of MovieCasting</returns>
-        IEnumerable<MovieCasting> GetMovieCasting();
-        /// <summary>
         /// Function to return an IEnumerable of MovieCasting of one movie
         /// </summary>
         /// <returns>IEnumerable of MovieCasting</returns>
         IEnumerable<MovieCasting> GetMovieCasting(int id);
-
+        /// <summary>
+        /// Function to update a Movie
+        /// </summary>
+        /// <param name="entity">Movie</param>
+        /// <returns>bool: true if success</returns>
+        bool Update(Movie entity);
     }
 }

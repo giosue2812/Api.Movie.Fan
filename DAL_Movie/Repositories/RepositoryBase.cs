@@ -47,14 +47,6 @@ namespace DAL_Movie.Repositories
         /// <param name="entity">Entity</param>
         /// <returns>TResult</returns>
         public abstract int Create(TEntity entity);
-        /// <summary>
-        /// Function Abstract to update an exist entity
-        /// </summary>
-        /// <typeparam name="TResult">TResult will be returned</typeparam>
-        /// <typeparam name="TBody">TBody represent a data to insert</typeparam>
-        /// <param name="entity">Entity</param>
-        /// <returns>TResult</returns>
-        public abstract bool Update(TEntity entity);
 
     }
 }

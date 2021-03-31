@@ -16,6 +16,7 @@ namespace DAL_Movie.Entities
         public string Content { get; set; }
         public DateTime DateNotice { get; set; }
         public bool IsActive { get; set; }
-        public bool IsUsers { get; set; }
+        public int IdMovie { get; set; }
+        public int IdUsers { get; set; }
     }
 }

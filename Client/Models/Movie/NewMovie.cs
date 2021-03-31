@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Client.Models.Movie
 {
+    /// <summary>
+    /// Class to secribe a new movie
+    /// </summary>
     public class NewMovie
     {
         public string Title { get; set; }

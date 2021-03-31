@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Client.Services
 {
     /// <summary>
-    /// Interface IMovieService for only Movie Service wich implement IService of movie with key int
+    /// Interface IMovieService for only Movie Service wich implement IService 
     /// </summary>
     public interface IMovieService :IService<Movie,int,NewMovie>
     {
@@ -17,17 +17,19 @@ namespace Client.Services
         /// Function to get a Movie with Directo and Writer
         /// </summary>
         /// <param name="id">int id of Movie</param>
-        /// <returns></returns>
+        /// <returns>MovieDirectorWriter</returns>
         MovieDirectorWriter GetMovieDirectorWriter(int id);
-        /// <summary>
-        /// Function to get all movie casting
-        /// </summary>
-        /// <returns>IEnumerable of MovieCasting</returns>
-        IEnumerable<MovieCasting> GetMovieCasting();
+
         /// <summary>
         /// Function to get a movie casting
         /// </summary>
         /// <returns>IEnumerable of MovieCasting</returns>
         IEnumerable<MovieCasting> GetMovieCasting(int id);
+        /// <summary>
+        /// Function to update a Movie
+        /// </summary>
+        /// <param name="movie">Movie</param>
+        /// <returns>bool:true if sucess</returns>
+        bool Update(Movie movie);
     }
 }

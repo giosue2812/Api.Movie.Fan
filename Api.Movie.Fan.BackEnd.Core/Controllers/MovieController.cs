@@ -1,10 +1,11 @@
 ﻿using Api.Movie.Fan.BackEnd.Core.Mappers;
-using Api.Movie.Fan.BackEnd.Core.Models;
+using Api.Movie.Fan.BackEnd.Core.Models.Movi;
 using Api.Movie.Fan.BackEnd.Core.Models.Form;
 using Client.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using Api.Movie.Fan.BackEnd.Core.Models.Form.Movies;
 
 namespace Api.Movie.Fan.BackEnd.Core.Controllers
 {
@@ -16,7 +17,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
     public class MovieController : ControllerBase
     {
         /// <summary>
-        /// private variable of type IMovieService
+        /// private of type IMovieService
         /// </summary>
         private IMovieService Service;
         /// <summary>
@@ -34,14 +35,14 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Movies> movies = Service.GetAll().Select(m => m.ToApiModel()).ToList();
+            List<ShortMovie> movies = Service.GetAll().Select(m => m.ToApi()).ToList();
             return Ok(movies);
         }
         [HttpGet]
         [Route("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(Service.Get(id).ToApiModel());
+            return Ok(Service.Get(id).ToApi());
         }
         /// <summary>
         /// Function to Get all movie with Director and Writer
@@ -51,7 +52,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [Route("MovieDirectorWriter")]
         public IActionResult GetMovieDirectorWriter()
         {
-            List<MovieDirectorWriter> movies_Director_Writer = Service.GetMovieDirectorWriter().Select(m => m.ToApiMovieDirectorWriter()).ToList();
+            List<MovieDirectorWriter> movies_Director_Writer = Service.GetMovieDirectorWriter().Select(m => m.ToApi()).ToList();
             return Ok(movies_Director_Writer);
         }
         /// <summary>
@@ -63,19 +64,8 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [Route("MovieDirectorWriter/{id}")]
         public IActionResult GetMovieDirectorWriter(int id)
         {
-            MovieDirectorWriter movieDirectorWriter = Service.GetMovieDirectorWriter(id).ToApiMovieDirectorWriter();
+            MovieDirectorWriter movieDirectorWriter = Service.GetMovieDirectorWriter(id).ToApi();
             return Ok(movieDirectorWriter);
-        }
-        /// <summary>
-        /// Function to get all movie casting
-        /// </summary>
-        /// <returns>IAction Result</returns>
-        [HttpGet]
-        [Route("MovieCasting")]
-        public IActionResult GetMovieCasting()
-        {
-            List<MovieCasting> movieCastings = Service.GetMovieCasting().Select(m => m.ToApiMoviCasting()).ToList();
-            return Ok(movieCastings);
         }
         /// <summary>
         /// Function to get one movie casting
@@ -86,8 +76,10 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [Route("MovieCasting/{id}")]
         public IActionResult GetMovieCasting(int id)
         {
-            List<MovieCasting> moviesCastings = Service.GetMovieCasting(id).Select(m => m.ToApiMoviCasting()).ToList();
-            return Ok(moviesCastings);
+            MovieCasting movieCasting = new MovieCasting();
+            movieCasting.Movies = Service.Get(id).ToApi();
+            movieCasting.Castings = Service.GetMovieCasting(id).Select(m => m.ToApi()).ToList();
+            return Ok(movieCasting);
         }
         /// <summary>
         /// Create a new movie
@@ -99,7 +91,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             try
             {
-                return Ok(Service.Create(newMovie.ToClientMovie()));
+                return Ok(Service.Create(newMovie.ToApi()));
             }
             catch
             {
@@ -116,7 +108,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             try
             {
-                return Ok(Service.Update(movie.ToClientMovie()));
+                return Ok(Service.Update(movie.ToApi()));
             }
             catch
             {

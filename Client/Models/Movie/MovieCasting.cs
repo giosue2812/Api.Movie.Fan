@@ -11,7 +11,6 @@ namespace Client.Models.Movie
     /// </summary>
     public class MovieCasting
     {
-        public string Title { get; set; }
         public string Actor { get; set; }
         public string Role { get; set; }
     }

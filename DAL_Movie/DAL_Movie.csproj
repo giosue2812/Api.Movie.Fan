@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Tool.Connection.DB\Tool.Connection.DB.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelView\User\" />
+  </ItemGroup>
+
 </Project>

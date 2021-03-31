@@ -68,6 +68,7 @@
     <Folder Include="Views\Movie" />
     <Folder Include="Views\User" />
     <Folder Include="Views\Notice" />
+    <Folder Include="Views\Person" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Person.sql" />
@@ -89,13 +90,20 @@
     <Build Include="Procedures\User\AddUser.sql" />
     <Build Include="Procedures\User\DeleteUser.sql" />
     <Build Include="Procedures\User\ResetPassword.sql" />
-    <Build Include="Procedures\Admin\ActiveAdmin.sql" />
-    <Build Include="Procedures\Admin\BannedUser.sql" />
-    <Build Include="Procedures\Admin\ReactiveUser.sql" />
+    <Build Include="Procedures\Admin\SwitchAdmin.sql" />
+    <Build Include="Procedures\Admin\SwitchActiveUser.sql" />
     <Build Include="Views\Movie\V_Movies.sql" />
     <Build Include="Views\User\V_User_List.sql" />
     <Build Include="Views\Notice\V_Notice.sql" />
-    <Build Include="Views\Movie\Movie_With_Dirctor_Writer_Name.sql" />
-    <Build Include="Views\Movie\Movie_Casting.sql" />
+    <Build Include="Views\Movie\V_Movie_With_Dirctor_Writer_Name.sql" />
+    <Build Include="Views\Person\V_Person.sql" />
+    <Build Include="Procedures\Movie\MovieCasting.sql" />
+    <Build Include="Procedures\Person\PersonMovie.sql" />
+    <Build Include="Procedures\Notice\DeleteNotice.sql" />
+    <Build Include="Procedures\Notice\NoticeByUser.sql" />
+    <Build Include="Views\Notice\V_NoticeByMovie.sql" />
+    <Build Include="Views\Notice\V_NoticeByUser.sql" />
+    <Build Include="Procedures\Notice\NoticeByMovie.sql" />
+    <Build Include="Procedures\User\LoginUser.sql" />
   </ItemGroup>
 </Project>

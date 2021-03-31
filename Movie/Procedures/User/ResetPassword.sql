@@ -16,5 +16,5 @@ BEGIN
 	DECLARE @PasswordHash VARBINARY(64);
 	SET @PasswordHash = HASHBYTES('SHA2_512',CONCAT(@Salt,@Password,@Secret,@Salt));
 
-	UPDATE [dbo].[Users] SET [Password] = @PasswordHash WHERE [Id] = @IdUser;
+	UPDATE [dbo].[Users] SET [Password] = @PasswordHash, [Salt] = @Salt WHERE [Id] = @IdUser;
 END

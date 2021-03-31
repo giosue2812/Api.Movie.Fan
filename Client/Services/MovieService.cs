@@ -38,7 +38,7 @@ namespace Client.Services
         /// Function to Get one movie
         /// </summary>
         /// <param name="id">int id of movie</param>
-        /// <returns></returns>
+        /// <returns>Movie</returns>
         public Movie Get(int id)
         {
             return Repository.Get(id).ToClient();
@@ -49,7 +49,7 @@ namespace Client.Services
         /// <returns>MovieDirectorWriter</returns>
         public IEnumerable<MovieDirectorWriter> GetMovieDirectorWriter()
         {
-            return Repository.GetMovieDirectorWriter().Select(m => m.ToMovieDirectorWriter());
+            return Repository.GetMovieDirectorWriter().Select(m => m.ToClient());
         }
         /// <summary>
         /// Function to Get one Movie Director and Writer
@@ -57,15 +57,7 @@ namespace Client.Services
         /// <returns>MovieDirectorWriter</returns>
         public MovieDirectorWriter GetMovieDirectorWriter(int id)
         {
-            return Repository.GetMovieDirectorWriter(id).ToMovieDirectorWriter();
-        }
-        /// <summary>
-        /// Function to Get all Movie with Casting
-        /// </summary>
-        /// <returns>MovieCasting</returns>
-        public IEnumerable<MovieCasting> GetMovieCasting()
-        {
-            return Repository.GetMovieCasting().Select(m => m.ToMovieCasting());
+            return Repository.GetMovieDirectorWriter(id).ToClient();
         }
         /// <summary>
         /// Function to Get one Movie with Casting
@@ -73,7 +65,7 @@ namespace Client.Services
         /// <returns>MovieCasting</returns>
         public IEnumerable<MovieCasting> GetMovieCasting(int id)
         {
-            return Repository.GetMovieCasting(id).Select(m => m.ToMovieCasting());
+            return Repository.GetMovieCasting(id).Select(m => m.ToClient());
         }
         /// <summary>
         /// Create a new movie
@@ -82,7 +74,7 @@ namespace Client.Services
         /// <returns>int of movie created</returns>
         public int Create(NewMovie entity)
         {
-            return Repository.Create(entity.ToDalMovie());
+            return Repository.Create(entity.ToDal());
         }
         /// <summary>
         /// Update an exist movie
@@ -91,7 +83,7 @@ namespace Client.Services
         /// <returns>bool : true if success</returns>
         public bool Update(Movie entity)
         {
-            return Repository.Update(entity.ToDalMovie());
+            return Repository.Update(entity.ToDal());
         }
     }
 }

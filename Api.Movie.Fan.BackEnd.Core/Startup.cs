@@ -14,6 +14,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Movie.Fan.BackEnd.Core.Models.TokenJWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Api.Movie.Fan.BackEnd.Core
 {
@@ -31,12 +35,40 @@ namespace Api.Movie.Fan.BackEnd.Core
         {
 
             services.AddControllers();
+            services.AddSingleton(typeof(TokenManager));
             services.AddSingleton<IMovieService, MovieService>();
             services.AddSingleton<IMovieRepository, MovieRepositry>();
+            services.AddSingleton<IPersonService, PersonService>();
+            services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddSingleton<INoticeService, NoticeService>();
+            services.AddSingleton<INoticeRepository, NoticeRepository>();
+            services.AddSingleton<IAdminService, AdminService>();
+            services.AddSingleton<IAdminRepository, UserRepository>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api.Movie.Fan.BackEnd.Core", Version = "v1" });
             });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("admin", policy => policy.RequireRole("admin"));
+                options.AddPolicy("user", policy => policy.RequireRole("user", "admin"));
+            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = Configuration["Token:Issuer"],
+                        ValidateAudience = true,
+                        ValidAudience = Configuration["Token:Audience"],
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Secret"]))
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +82,7 @@ namespace Api.Movie.Fan.BackEnd.Core
             }
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

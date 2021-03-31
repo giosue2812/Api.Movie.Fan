@@ -32,14 +32,6 @@ namespace Client.Services
         /// </summary>
         /// <returns>Entity</returns>
         IEnumerable<TEntity> GetAll();
-        /// <summary>
-        /// Function to update an Entity
-        /// </summary>
-        /// <typeparam name="TResult">Type of Result</typeparam>
-        /// <typeparam name="TBody">Type of Body</typeparam>
-        /// <param name="entity">Entity</param>
-        /// <returns>Result</returns>
-        bool Update(TEntity entity);
     }
 }
 

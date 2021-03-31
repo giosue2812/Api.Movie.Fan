@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL_Movie", "DAL_Movie\DAL_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Connection.DB", "Tool.Connection.DB\Tool.Connection.DB.csproj", "{08F1CD67-5A29-4621-9E4B-98F005CF298F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{3AF61B42-0FA8-4B4B-B01B-6A2A66CA4A70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{3AF61B42-0FA8-4B4B-B01B-6A2A66CA4A70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

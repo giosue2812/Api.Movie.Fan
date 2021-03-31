@@ -1,6 +1,6 @@
 ﻿using DAL_Movie.Entities;
 using DAL_Movie.Mappers;
-using DAL_Movie.ModelView;
+using DAL_Movie.ModelView.Movie;
 using DAL_Movie.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,25 +13,21 @@ using Tool.Connection.DB;
 namespace DAL_Movie.Repositories
 {
     /// <summary>
-    /// Movie Repository Request to database
+    /// Movie Repository
     /// </summary>
     public class MovieRepositry : RepositoryBase<Movie, int>,IMovieRepository
     {
-        public MovieRepositry():base()
-        {
-
-        }
         /// <summary>
-        /// Function to get all movies
+        /// Function to get all Movie
         /// </summary>
         /// <returns>IEnumerblae of Movie</returns>
         public override IEnumerable<Movie> GetAll()
         {
             Command command = new Command("SELECT * FROM V_Movies");
-            return Connection.ExecuteReader(command, (m) => m.ToMovies());
+            return Connection.ExecuteReader(command, (m) => m.ToDalMovie());
         }
         /// <summary>
-        /// Function to get one movie
+        /// Function to get one movieM
         /// </summary>
         /// <param name="id">int id of movie</param>
         /// <returns>Movie</returns>
@@ -39,12 +35,12 @@ namespace DAL_Movie.Repositories
         {
             Command command = new Command("SELECT * FROM V_Movies WHERE IdMovie = @IdMovie");
             command.AddParameter("@IdMovie", id);
-            return Connection.ExecuteReader<Movie>(command, (m) => m.ToMovies()).SingleOrDefault();
+            return Connection.ExecuteReader<Movie>(command, (m) => m.ToDalMovie()).SingleOrDefault();
         }
         /// <summary>
-        /// Function to create a new movie
+        /// Function to create a new Movie
         /// </summary>
-        /// <param name="entity">New Movie</param>
+        /// <param name="entity">Entity Movie</param>
         /// <returns>int id of movie created</returns>
         public override int Create(Movie entity)
         {
@@ -54,14 +50,14 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@Director", entity.Director);
             command.AddParameter("@Writer", entity.Writer);
             command.AddParameter("YearRelease", entity.YearRelease);
-            return (int)Connection.ExecuteNonQuery(command);
+            return (int)Connection.ExecuteScalar(command);
         }
         /// <summary>
-        /// Function to update a existing movie
+        /// Function to update a existing Movie
         /// </summary>
-        /// <param name="entity">Update Movie</param>
-        /// <returns>bool true or false</returns>
-        public override bool Update(Movie entity)
+        /// <param name="entity">Entity Movie</param>
+        /// <returns>bool: true if sucess</returns>
+        public bool Update(Movie entity)
         {
             Command command = new Command("UpdateMovie", true);
             command.AddParameter("@IdMovie", entity.Id);
@@ -79,7 +75,7 @@ namespace DAL_Movie.Repositories
         public IEnumerable<MovieDirectorWriter> GetMovieDirectorWriter()
         {
             Command command = new Command("SELECT * FROM Movie_With_Dirctor_Writer_Name");
-            return Connection.ExecuteReader(command, (M) => M.ToMovieDirectorWriter());
+            return Connection.ExecuteReader(command, (M) => M.ToDalMovieDirectorWriter());
         }
         /// <summary>
         /// Function to get one movie with Director and Writer
@@ -90,27 +86,18 @@ namespace DAL_Movie.Repositories
         {
             Command command = new Command("SELECT * FROM Movie_With_Dirctor_Writer_Name WHERE IdMovie = @Id");
             command.AddParameter("@Id", id);
-            return Connection.ExecuteReader(command, (m) => m.ToMovieDirectorWriter()).SingleOrDefault();
-        }
-        /// <summary>
-        /// Function to get a list of movie with a casting(Actor and role)
-        /// </summary>
-        /// <returns>IEnumerable of MovieCasting</returns>
-        public IEnumerable<MovieCasting> GetMovieCasting()
-        {
-            Command command = new Command("SELECT * FROM Movie_Casting");
-            return Connection.ExecuteReader(command, (M) => M.ToMovieCasting());
+            return Connection.ExecuteReader(command, (m) => m.ToDalMovieDirectorWriter()).SingleOrDefault();
         }
         /// <summary>
         /// Function to get a list of one movie with a casting(Actor and Role)
         /// </summary>
         /// <param name="id">int id of movie</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable of MovieCasting</returns>
         public IEnumerable<MovieCasting> GetMovieCasting(int id)
         {
-            Command command = new Command("SELECT * FROM Movie_Casting WHERE IdMovie = @Id");
-            command.AddParameter("@Id", id);
-            return Connection.ExecuteReader(command, (m) => m.ToMovieCasting());
+            Command command = new Command("MovieCasting",true);
+            command.AddParameter("@IdMovie", id);
+            return Connection.ExecuteReader(command, (m) => m.ToDalMovieCasting());
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Client.Mappers
         /// </summary>
         /// <param name="entity">MovieDirectorWriter</param>
         /// <returns>MovieDirectorWriter model service</returns>
-        public static SEV.MovieDirectorWriter ToMovieDirectorWriter(this DAL.ModelView.MovieDirectorWriter entity)
+        public static SEV.MovieDirectorWriter ToClient(this DAL.ModelView.Movie.MovieDirectorWriter entity)
         {
             if (entity == null) return null;
             return new SEV.MovieDirectorWriter()
@@ -52,17 +52,21 @@ namespace Client.Mappers
         /// </summary>
         /// <param name="entity">MovieCasting</param>
         /// <returns>MovieCasting model service</returns>
-        public static SEV.MovieCasting ToMovieCasting(this DAL.ModelView.MovieCasting entity)
+        public static SEV.MovieCasting ToClient(this DAL.ModelView.Movie.MovieCasting entity)
         {
             if (entity == null) return null;
             return new SEV.MovieCasting()
             {
-                Title = entity.Title,
                 Actor = entity.Actor,
                 Role = entity.Role
             };
         }
-        public static DAL.Entities.Movie ToDalMovie(this SEV.NewMovie entity)
+        /// <summary>
+        /// Mapping to Dal Movie from Sev.NewMovie
+        /// </summary>
+        /// <param name="entity">SEV.NewMovie</param>
+        /// <returns>Dal Movie</returns>
+        public static DAL.Entities.Movie ToDal(this SEV.NewMovie entity)
         {
             if (entity == null) return null;
             return new DAL.Entities.Movie()
@@ -74,7 +78,12 @@ namespace Client.Mappers
                 YearRelease = entity.YearRelease
             };
         }
-        public static DAL.Entities.Movie ToDalMovie(this SEV.Movie entity)
+        /// <summary>
+        /// Mapping to Dal Movie from Sev.NewMovie
+        /// </summary>
+        /// <param name="entity">SEV.Movie</param>
+        /// <returns>Dal Movie</returns>
+        public static DAL.Entities.Movie ToDal(this SEV.Movie entity)
         {
             if (entity == null) return null;
             return new DAL.Entities.Movie()

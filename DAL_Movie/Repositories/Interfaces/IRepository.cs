@@ -30,11 +30,5 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <param name="entity">Entity</param>
         /// <returns>Result</returns>
         int Create(TEntity entity);
-        /// <summary>
-        /// Function to update Entity
-        /// </summary>
-        /// <param name="entity">Entity</param>
-        /// <returns>Result</returns>
-        bool Update(TEntity entity);
     }
 }
