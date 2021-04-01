@@ -11,6 +11,7 @@ namespace Api.Movie.Fan.BackEnd.Core
 {
     public class Program
     {
+#pragma warning disable CS1591
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -23,4 +24,5 @@ namespace Api.Movie.Fan.BackEnd.Core
                     webBuilder.UseStartup<Startup>();
                 });
     }
+#pragma warning restore CS1591
 }

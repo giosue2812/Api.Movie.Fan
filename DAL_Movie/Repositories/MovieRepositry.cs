@@ -74,7 +74,7 @@ namespace DAL_Movie.Repositories
         /// <returns>IEnumerable of MovieDirectorWriter</returns>
         public IEnumerable<MovieDirectorWriter> GetMovieDirectorWriter()
         {
-            Command command = new Command("SELECT * FROM Movie_With_Dirctor_Writer_Name");
+            Command command = new Command("SELECT * FROM V_Movie_With_Dirctor_Writer_Name");
             return Connection.ExecuteReader(command, (M) => M.ToDalMovieDirectorWriter());
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace DAL_Movie.Repositories
         /// <returns>MovieDirectorWriter</returns>
         public MovieDirectorWriter GetMovieDirectorWriter(int id)
         {
-            Command command = new Command("SELECT * FROM Movie_With_Dirctor_Writer_Name WHERE IdMovie = @Id");
+            Command command = new Command("SELECT * FROM V_Movie_With_Dirctor_Writer_Name WHERE IdMovie = @Id");
             command.AddParameter("@Id", id);
             return Connection.ExecuteReader(command, (m) => m.ToDalMovieDirectorWriter()).SingleOrDefault();
         }

@@ -72,7 +72,9 @@ namespace DAL_Movie.Repositories
         {
             Command command = new Command("DeleteNotice", true);
             command.AddParameter("@IdNotice", id);
-            return Connection.ExecuteNonQuery(command) == 1;
+            bool result = Connection.ExecuteNonQuery(command) == 1;
+            if (result) return result;
+            else throw new ArgumentException();
         }
         /// <summary>
         /// Function to Get Notice by user

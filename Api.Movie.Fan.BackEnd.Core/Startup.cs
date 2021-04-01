@@ -1,23 +1,19 @@
 using Client.Services;
 using DAL_Movie.Repositories;
-using DAL = DAL_Movie.Entities;
 using DAL_Movie.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api.Movie.Fan.BackEnd.Core.Models.TokenJWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Api.Movie.Fan.BackEnd.Core
 {
@@ -48,8 +44,13 @@ namespace Api.Movie.Fan.BackEnd.Core
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api.Movie.Fan.BackEnd.Core", Version = "v1" });
+                c.EnableAnnotations();
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "swagger.xml");
+                c.IncludeXmlComments(filePath);
+                c.DescribeAllParametersInCamelCase();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Film GioGio", Version = "v1" });
             });
+              
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("admin", policy => policy.RequireRole("admin"));
@@ -78,9 +79,13 @@ namespace Api.Movie.Fan.BackEnd.Core
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api.Movie.Fan.BackEnd.Core v1"));
+                app.UseSwaggerUI(c => 
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Film GioGio v1");
+                });
+                
             }
-
+            
             app.UseRouting();
             app.UseAuthentication();
 

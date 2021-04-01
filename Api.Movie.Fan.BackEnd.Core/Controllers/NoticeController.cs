@@ -1,9 +1,11 @@
 ﻿using Api.Movie.Fan.BackEnd.Core.Mappers;
 using Api.Movie.Fan.BackEnd.Core.Models.Form.Notice;
 using Api.Movie.Fan.BackEnd.Core.Models.Notice;
+using Api.Movie.Fan.BackEnd.Core.ResponseError;
 using Client.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +13,13 @@ using System.Threading.Tasks;
 
 namespace Api.Movie.Fan.BackEnd.Core.Controllers
 {
-    /// <summary>
-    /// Controller Notice
-    /// </summary>
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class NoticeController : ControllerBase
     {
-        /// <summary>
-        /// Private Property of type INoticeService
-        /// </summary>
         private INoticeService Service;
-        /// <summary>
-        /// Private Property of type IMovieService
-        /// </summary>
         private IMovieService ServiceMovie;
-        /// <summary>
-        /// Private Property of type IUserService
-        /// </summary>
         private IUserService ServiceUser;
         /// <summary>
         /// Constructor of Controller Notice
@@ -42,45 +33,60 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             ServiceMovie = serviceMovie;
             ServiceUser = serviceUser;
         }
-        /// <summary>
-        /// Function to get all Notice
-        /// </summary>
         /// <returns>IActionResult</returns>
+        #region Swagger
+        [SwaggerOperation("Get All Notice")]
+        [SwaggerResponse(200,"Return a lis of Notice",typeof(Notice))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(Service.GetAll().Select(N => N.ToApi()));
         }
+        /// <param name="id">int id of Notice</param>
+        /// <returns>IActionResult</returns>
+        #region Swagger
+        [SwaggerOperation("Get Notice")]
+        [SwaggerResponse(200,"Return one Notice",typeof(Notice))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get([FromRoute, SwaggerParameter("Id of Notice",Required = true)]int id)
         {
             return Ok(Service.Get(id).ToApi());
         }
-        /// <summary>
-        /// Function to create a new Notice
-        /// </summary>
+        #region Swagger
+        [SwaggerOperation("Create Notice")]
+        [SwaggerResponse(200,"Return id of Notice created",typeof(int))]
+        [SwaggerResponse(400,"Form Is invalid",typeof(ExceptionResponse))]
+        [SwaggerResponse(500,"Server Errror")]
+        #endregion
         /// <param name="newNotice">NewNoticeForm</param>
         /// <returns>IActionResult</returns>
         [HttpPost]
-        public IActionResult Create(NewNoticeForm newNotice)
+        public IActionResult Create([FromBody,SwaggerRequestBody("Form new Notice",Required = true)] NewNoticeForm newNotice)
         {
             try
             {
                 return Ok(Service.Create(newNotice.ToClient()));
             }
-            catch
+            catch(Exception)
             {
-                return new BadRequestObjectResult(new { error = "Form is invalid" });
+                return new BadRequestObjectResult(new ExceptionResponse() {Status = 400,Value = "Form is Invalid" });
             }
         }
-        /// <summary>
-        /// Function to update an existing notice
-        /// </summary>
+        #region Swagger
+        [SwaggerOperation("Update Notice")]
+        [SwaggerResponse(200,"Return bool: true if success",typeof(bool))]
+        [SwaggerResponse(400,"Form is invalid",typeof(ExceptionResponse))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         /// <param name="notice">Notice</param>
         /// <returns>IActionResult</returns>
         [HttpPut]
-        public IActionResult Update(Notice notice)
+        public IActionResult Update([FromBody, SwaggerRequestBody("Notice", Required = true)] Notice notice)
         {
             try
             {
@@ -88,16 +94,19 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             }
             catch
             {
-                return new BadRequestObjectResult(new { error = "Form is invald" });
+                return new BadRequestObjectResult(new ExceptionResponse() {Status = 400, Value = "Form is Invalid" });
             }
         }
-        /// <summary>
-        /// Function to delete a notice
-        /// </summary>
         /// <param name="id">int id of Notice</param>
         /// <returns>IActionResult</returns>
+        #region Swagger
+        [SwaggerOperation("Delete Notice")]
+        [SwaggerResponse(200,"Return bool : true if success",typeof(bool))]
+        [SwaggerResponse(400,"Notice not exist",typeof(ExceptionResponse))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public IActionResult Delete([FromRoute,SwaggerParameter("Id of Notice",Required = true)]int id)
         {
             try
             {
@@ -105,17 +114,19 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             }
             catch
             {
-                return BadRequest();
+                return new BadRequestObjectResult(new ExceptionResponse() { Status = 400,Value = "Notice not exist"});
             }
         }
-        /// <summary>
-        /// Function to get Movie with Notices
-        /// </summary>
         /// <param name="id">int id of movie</param>
         /// <returns>IActionResult</returns>
+        #region Swagger
+        [SwaggerOperation("Get Notice by Movie")]
+        [SwaggerResponse(200,"Return Movie with Notice",typeof(NoticeMovie))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         [Route("GetNoticeByMovie/{id}")]
-        public IActionResult GetNoticeByMovie(int id)
+        public IActionResult GetNoticeByMovie([FromRoute,SwaggerParameter("Id of Movie",Required = true)]int id)
         {
             NoticeMovie noticeMovie = new NoticeMovie();
             noticeMovie.Movie = ServiceMovie.Get(id).ToApi();

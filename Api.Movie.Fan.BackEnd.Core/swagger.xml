@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api.Movie.Fan.BackEnd.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.#ctor(Client.Services.IMovieService)">
+            <param name="service">IMovieService</param>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.GetAll">
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.Get(System.Int32)">
+            <param name="id">Int id of Movie</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.GetMovieDirectorWriter">
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.GetMovieDirectorWriter(System.Int32)">
+            <param name="id">int id of movie</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.GetMovieCasting(System.Int32)">
+            <param name="id">int id of movie casting</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.CreateNewMovie(Api.Movie.Fan.BackEnd.Core.Models.Form.Movies.NewMovieForm)">
+            <param name="newMovie">NewMovieForm</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.MovieController.UpdateMovie(Api.Movie.Fan.BackEnd.Core.Models.Movi.Movies)">
+            <param name="movie">Movies</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.#ctor(Client.Services.INoticeService,Client.Services.IMovieService,Client.Services.IUserService)">
+            <summary>
+            Constructor of Controller Notice
+            </summary>
+            <param name="service">INoticeService</param>
+            <param name="serviceMovie">IMovieService</param>
+            <param name="serviceUser">IUserService</param>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.GetAll">
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.Get(System.Int32)">
+            <param name="id">int id of Notice</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.Delete(System.Int32)">
+            <param name="id">int id of Notice</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.GetNoticeByMovie(System.Int32)">
+            <param name="id">int id of movie</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController">
+            <summary>
+            Controller Person
+            </summary>
+        </member>
+        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Service">
+            <summary>
+            Private of type IPersonService
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.#ctor(Client.Services.IPersonService)">
+            <summary>
+            Constructor of Controller wich implement a IPersonService
+            </summary>
+            <param name="service">IPersonService</param>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.GetAll">
+            <summary>
+            Function to GetAll Person
+            </summary>
+            <returns>IEnumerable of Person</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Get(System.Int32)">
+            <summary>
+            Function to Get one Person
+            </summary>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Create(Api.Movie.Fan.BackEnd.Core.Models.Form.Persons.NewPersonForm)">
+            <summary>
+            Function to create a new Person
+            </summary>
+            <param name="newPerson">NewPersonForm</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Update(Api.Movie.Fan.BackEnd.Core.Models.Persons.Person)">
+            <summary>
+            Function to update a Person
+            </summary>
+            <param name="person">Person</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.GetPersonMovie(System.Int32)">
+            <summary>
+            Function to Get a Person with list of movie
+            </summary>
+            <param name="id">int id of Person</param>
+            <returns>IAction Result</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Controllers.UserController">
+            <summary>
+            Controller User
+            </summary>
+        </member>
+        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Service">
+            <summary>
+            Private Property IUserService
+            </summary>
+        </member>
+        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.AdminService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.#ctor(Client.Services.IUserService,Client.Services.IAdminService,Api.Movie.Fan.BackEnd.Core.Models.TokenJWT.TokenManager)">
+            <summary>
+            Constructor User controller
+            </summary>
+            <param name="service">IUserService</param>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.GetAll">
+            <summary>
+            Function to get all user
+            </summary>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            Function to get one user
+            </summary>
+            <param name="id">int id of user</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Register(Api.Movie.Fan.BackEnd.Core.Models.Form.User.NewUserForm)">
+            <summary>
+            Function to register user
+            </summary>
+            <param name="newUser">NewUserForm</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Login(Api.Movie.Fan.BackEnd.Core.Models.Form.User.LoginForm)">
+            <summary>
+            Function Login user
+            </summary>
+            <param name="login">LoginForm</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.SwitchUser(System.Int32)">
+            <summary>
+            Funciton to switch an user in Admin or simple user
+            </summary>
+            <param name="id">int id of user</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.SwitchActiveUser(System.Int32)">
+            <summary>
+            Funciton to switch an user in active or disabeld
+            </summary>
+            <param name="id">int id of user</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.ResetPassword(Api.Movie.Fan.BackEnd.Core.Models.Form.User.UserResetPasswordForm)">
+            <summary>
+            Funciton to reset password
+            </summary>
+            <param name="id">int id of user</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper">
+            <summary>
+            Mapper to map a Api model to client model.
+            Mapper to map a client model to Api model
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper.ToApi(Client.Models.Movie.MovieDirectorWriter)">
+            <summary>
+            Functio static to Convert an object MovieDirectorWriter from Client to API MovieDirectorWriter
+            </summary>
+            <param name="movie">Client MovieDirectorWriter</param>
+            <returns>API MovieDirectorWriter</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper.ToApi(Client.Models.Movie.MovieCasting)">
+            <summary>
+            Functio static to Convert an object MovieCasting from Client to API Casting
+            </summary>
+            <param name="movie">Client MovieCasting</param>
+            <returns>API Casting</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper.ToApi(Client.Models.Movie.Movie)">
+            <summary>
+            Functio static to Convert an object Movie from Client to API ShortfMovie
+            </summary>
+            <param name="movie">Client MovieCasting</param>
+            <returns>API ShortfMovie</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper.ToApi(Api.Movie.Fan.BackEnd.Core.Models.Form.Movies.NewMovieForm)">
+            <summary>
+            Functio static to Convert an object NewMovieForm API to Client NewMovie
+            </summary>
+            <param name="movie">API NewMovieForm</param>
+            <returns>Client NewMovie</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.MovieMapper.ToApi(Api.Movie.Fan.BackEnd.Core.Models.Movi.Movies)">
+            <summary>
+            Functio static to Convert an object Movies API to Client Movie
+            </summary>
+            <param name="movie">API Movies</param>
+            <returns>Client Movie</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper">
+            <summary>
+            Mapper for Notice
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper.ToApi(Client.Models.Notice.Notice)">
+            <summary>
+            Function to convert a Client Notice to API Notice
+            </summary>
+            <param name="notice">Client Notice</param>
+            <returns>API Notice</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Notice.Notice)">
+            <summary>
+            Function to convert API Notice to Client Notice
+            </summary>
+            <param name="notice">API Notice</param>
+            <returns>Client Notice</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Form.Notice.NewNoticeForm)">
+            <summary>
+            Function to convert a API NewFormNotice to Client NewNotice
+            </summary>
+            <param name="newNotice">API NewNoticeForm</param>
+            <returns>Client NewNotice</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper.ToApi(Client.Models.Notice.NoticeByMovie)">
+            <summary>
+            Function to convert Client NoticeByMovie to API NoticeByMovie
+            </summary>
+            <param name="entity">Client NoticeByMovie</param>
+            <returns>API NoticeByMovie</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.NoticeMapper.ToApi(Client.Models.Notice.NoticeByUser)">
+            <summary>
+            Function to convert Client NoticeByUser to API NoticeByUser
+            </summary>
+            <param name="entity">Client NoticeByUser</param>
+            <returns>API NoticeByUser</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper">
+            <summary>
+            Mapper to map a Api model to client model
+            Mapper to map a client model to Api model
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper.ToApi(Client.Models.Persons.Person)">
+            <summary>
+            Function static to Convert an object Person from Client to API Person
+            </summary>
+            <param name="movie">Client Person</param>
+            <returns>API Person</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Form.Persons.NewPersonForm)">
+            <summary>
+            Function static to Convert an Object NewPerson from API to Client NewPerson
+            </summary>
+            <param name="person">API NewPerson</param>
+            <returns>Client NewPerson</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Persons.Person)">
+            <summary>
+            Function static to Convert an Object Person from API to Client Person
+            </summary>
+            <param name="person">API Person</param>
+            <returns>Client Person</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper.ToApi(Client.Models.Persons.PersonMovie)">
+            <summary>
+            Function static to Convert an Object PersonMovie from Client to API MovieByPerson
+            </summary>
+            <param name="personMovie">Client PersonMovie</param>
+            <returns>API MovieByPerson</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.PersonMapper.ToApiShort(Client.Models.Persons.Person)">
+            <summary>
+            Function static to Convert an Object Person from Client to API Person (Short object)
+            </summary>
+            <param name="person">Client Person</param>
+            <returns>API Person</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Mappers.UserMapper">
+            <summary>
+            Mapper User
+            </summary>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.UserMapper.ToApi(Client.Models.Users.Users)">
+            <summary>
+            Function to convert Client Users to API UserShort
+            </summary>
+            <param name="entity">Client Users</param>
+            <returns>API UserShort</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.UserMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Form.User.NewUserForm)">
+            <summary>
+            Function to convert API NewUserForm to Client NewUser
+            </summary>
+            <param name="newUser">Client NewUser</param>
+            <returns>API NewUserForm</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.UserMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Form.User.LoginForm)">
+            <summary>
+            Function to convert API LoginForm to Client UserLogin
+            </summary>
+            <param name="login">Client UserLogin</param>
+            <returns>API LoginForm</returns>
+        </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Mappers.UserMapper.ToClient(Api.Movie.Fan.BackEnd.Core.Models.Form.User.UserResetPasswordForm)">
+            <summary>
+            Function to convert API UserResetPassword to Client UserResetPassword
+            </summary>
+            <param name="login">Client UserResetPassword</param>
+            <returns>API UserResetPassword</returns>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Movi.Casting">
+            <summary>
+            Class to describe a casting
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Movi.MovieDirectorWriter">
+            <summary>
+            class to describe a Movie Director Writer
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Movi.Movies">
+            <summary>
+            class to describe a Movie
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Movi.ShortMovie">
+            <summary>
+            Class to describe a short movie
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.Notice">
+            <summary>
+            Class to describe a Notice
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.NoticeByMovie">
+            <summary>
+            Class to describe a notice by movie
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.NoticeMovie">
+            <summary>
+            Class to describe a movie with list of notice
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Persons.MovieByPerson">
+            <summary>
+            Class to describe a Movie by person
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Persons.Person">
+            <summary>
+            Class to describe a Person
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Persons.PersonMovie">
+            <summary>
+            Class To describe a Person with movie
+            </summary>
+        </member>
+    </members>
+</doc>
