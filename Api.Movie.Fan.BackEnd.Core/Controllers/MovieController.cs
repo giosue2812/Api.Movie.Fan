@@ -7,6 +7,7 @@ using System.Linq;
 using Api.Movie.Fan.BackEnd.Core.Models.Form.Movies;
 using Swashbuckle.AspNetCore.Annotations;
 using Api.Movie.Fan.BackEnd.Core.ResponseError;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Movie.Fan.BackEnd.Core.Controllers
 {

@@ -12,8 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
+
 
 namespace Api.Movie.Fan.BackEnd.Core
 {
@@ -49,6 +48,28 @@ namespace Api.Movie.Fan.BackEnd.Core
                 c.IncludeXmlComments(filePath);
                 c.DescribeAllParametersInCamelCase();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Film GioGio", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
             });
               
             services.AddAuthorization(options =>
@@ -56,7 +77,11 @@ namespace Api.Movie.Fan.BackEnd.Core
                 options.AddPolicy("admin", policy => policy.RequireRole("admin"));
                 options.AddPolicy("user", policy => policy.RequireRole("user", "admin"));
             });
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(option =>
                 {
                     option.TokenValidationParameters = new TokenValidationParameters()
@@ -85,10 +110,8 @@ namespace Api.Movie.Fan.BackEnd.Core
                 });
                 
             }
-            
             app.UseRouting();
             app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

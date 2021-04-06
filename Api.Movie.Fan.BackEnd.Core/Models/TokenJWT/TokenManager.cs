@@ -33,7 +33,8 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.TokenJWT
             Claim[] claims = new[]
             {
                 new Claim(ClaimTypes.Email,userShort.Email),
-                new Claim("Pseudo",userShort.Pseudo)
+                new Claim("Pseudo",userShort.Pseudo),
+                new Claim(ClaimTypes.Role,userShort.IsAdmin ? "Admin":"User")
             };
 
             JwtSecurityToken token = new JwtSecurityToken(

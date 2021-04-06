@@ -21,7 +21,8 @@ namespace Client.Mappers
                 Id = entity.Id,
                 BirthDate = entity.BirthDate,
                 Email = entity.Email,
-                Pseudo = entity.Pseudo
+                Pseudo = entity.Pseudo,
+                IsAdmin = entity.IsAdmin
             };
         }
         /// <summary>

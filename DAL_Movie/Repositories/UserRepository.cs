@@ -57,7 +57,8 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@Email", users.Email);
             command.AddParameter("@Password", users.Password);
             Users user = Connection.ExecuteReader(command,(m) => m.ToDalUser()).SingleOrDefault();
-            return user;
+            if (user != null) return user;
+            else throw new Exception();
         }
         /// <summary>
         /// Function to delete an User
@@ -81,7 +82,9 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@IdUser", users.Id);
             command.AddParameter("@Email", users.Email);
             command.AddParameter("@Password", users.Password);
-            return Connection.ExecuteNonQuery(command) == 1;
+            bool result = Connection.ExecuteNonQuery(command) == 1;
+            if (result) return result;
+            else throw new ArgumentException();
         }
         /// <summary>
         /// Funtion to switch an user in admin or simple user

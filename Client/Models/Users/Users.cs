@@ -12,5 +12,6 @@ namespace Client.Models.Users
         public string Email { get; set; }
         public string Pseudo { get; set; }
         public DateTime BirthDate { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

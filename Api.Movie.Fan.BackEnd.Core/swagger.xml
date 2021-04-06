@@ -56,14 +56,13 @@
             <param name="id">int id of movie</param>
             <returns>IActionResult</returns>
         </member>
+        <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.NoticeController.GetNoticeByUser(System.Int32)">
+            <param name="id">int id of User</param>
+            <returns>IActionResult</returns>
+        </member>
         <member name="T:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController">
             <summary>
             Controller Person
-            </summary>
-        </member>
-        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Service">
-            <summary>
-            Private of type IPersonService
             </summary>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.#ctor(Client.Services.IPersonService)">
@@ -73,35 +72,20 @@
             <param name="service">IPersonService</param>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.GetAll">
-            <summary>
-            Function to GetAll Person
-            </summary>
             <returns>IEnumerable of Person</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Get(System.Int32)">
-            <summary>
-            Function to Get one Person
-            </summary>
             <returns>IAction Result</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Create(Api.Movie.Fan.BackEnd.Core.Models.Form.Persons.NewPersonForm)">
-            <summary>
-            Function to create a new Person
-            </summary>
             <param name="newPerson">NewPersonForm</param>
             <returns>IAction Result</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.Update(Api.Movie.Fan.BackEnd.Core.Models.Persons.Person)">
-            <summary>
-            Function to update a Person
-            </summary>
             <param name="person">Person</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.PersonController.GetPersonMovie(System.Int32)">
-            <summary>
-            Function to Get a Person with list of movie
-            </summary>
             <param name="id">int id of Person</param>
             <returns>IAction Result</returns>
         </member>
@@ -110,67 +94,35 @@
             Controller User
             </summary>
         </member>
-        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Service">
-            <summary>
-            Private Property IUserService
-            </summary>
-        </member>
-        <member name="F:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.AdminService">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.#ctor(Client.Services.IUserService,Client.Services.IAdminService,Api.Movie.Fan.BackEnd.Core.Models.TokenJWT.TokenManager)">
-            <summary>
-            Constructor User controller
-            </summary>
             <param name="service">IUserService</param>
+            <param name="adminService">IAdminService</param>
+            <param name="tokenManager">TokenManager</param>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.GetAll">
-            <summary>
-            Function to get all user
-            </summary>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Get(System.Int32)">
-            <summary>
-            Function to get one user
-            </summary>
             <param name="id">int id of user</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Register(Api.Movie.Fan.BackEnd.Core.Models.Form.User.NewUserForm)">
-            <summary>
-            Function to register user
-            </summary>
             <param name="newUser">NewUserForm</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.Login(Api.Movie.Fan.BackEnd.Core.Models.Form.User.LoginForm)">
-            <summary>
-            Function Login user
-            </summary>
             <param name="login">LoginForm</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.SwitchUser(System.Int32)">
-            <summary>
-            Funciton to switch an user in Admin or simple user
-            </summary>
             <param name="id">int id of user</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.SwitchActiveUser(System.Int32)">
-            <summary>
-            Funciton to switch an user in active or disabeld
-            </summary>
             <param name="id">int id of user</param>
             <returns>IActionResult</returns>
         </member>
         <member name="M:Api.Movie.Fan.BackEnd.Core.Controllers.UserController.ResetPassword(Api.Movie.Fan.BackEnd.Core.Models.Form.User.UserResetPasswordForm)">
-            <summary>
-            Funciton to reset password
-            </summary>
             <param name="id">int id of user</param>
             <returns>IActionResult</returns>
         </member>
@@ -329,6 +281,36 @@
             <param name="login">Client UserResetPassword</param>
             <returns>API UserResetPassword</returns>
         </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.Movies.NewMovieForm">
+            <summary>
+            Class to describe a New Movie Form
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.Notice.NewNoticeForm">
+            <summary>
+            Class to describe New Notice Form
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.Persons.NewPersonForm">
+            <summary>
+            Class to describe a New Person Form
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.User.LoginForm">
+            <summary>
+            Class to describe a Login Form
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.User.NewUserForm">
+            <summary>
+            Class to describe a New User Form
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Form.User.UserResetPasswordForm">
+            <summary>
+            Class to User Reset Password Form
+            </summary>
+        </member>
         <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Movi.Casting">
             <summary>
             Class to describe a casting
@@ -359,9 +341,19 @@
             Class to describe a notice by movie
             </summary>
         </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.NoticeByUser">
+            <summary>
+            Class to describe a notice by user
+            </summary>
+        </member>
         <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.NoticeMovie">
             <summary>
             Class to describe a movie with list of notice
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Notice.NoticeUser">
+            <summary>
+            Class to describe a Notice User
             </summary>
         </member>
         <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Persons.MovieByPerson">
@@ -377,6 +369,21 @@
         <member name="T:Api.Movie.Fan.BackEnd.Core.Models.Persons.PersonMovie">
             <summary>
             Class To describe a Person with movie
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.User.Users">
+            <summary>
+            Class to describe an Users
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.Models.User.UserShort">
+            <summary>
+            Class to describe an Short User
+            </summary>
+        </member>
+        <member name="T:Api.Movie.Fan.BackEnd.Core.ResponseError.ExceptionResponse">
+            <summary>
+            Class to describe an Exception Response
             </summary>
         </member>
     </members>

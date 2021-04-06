@@ -133,6 +133,13 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             noticeMovie.NoticeByMovie = Service.GetNoticeByMovie(id).Select(NM => NM.ToApi());
             return Ok(noticeMovie);
         }
+        /// <param name="id">int id of User</param>
+        /// <returns>IActionResult</returns>
+        #region
+        [SwaggerOperation("Get Notice By User")]
+        [SwaggerResponse(200,"Return notice by User",typeof(NoticeUser))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         [Route("GetNoticeByUser/{id}")]
         public IActionResult GetNoticeByUser(int id)

@@ -5,19 +5,19 @@ using Api.Movie.Fan.BackEnd.Core.Mappers;
 using Api.Movie.Fan.BackEnd.Core.Models.Form.Persons;
 using Api.Movie.Fan.BackEnd.Core.Models.Persons;
 using Api.Movie.Fan.BackEnd.Core.Models.Movi;
+using Swashbuckle.AspNetCore.Annotations;
+using Api.Movie.Fan.BackEnd.Core.ResponseError;
 
 namespace Api.Movie.Fan.BackEnd.Core.Controllers
 {
     /// <summary>
     /// Controller Person
     /// </summary>
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonController : ControllerBase
     {
-        /// <summary>
-        /// Private of type IPersonService
-        /// </summary>
         private IPersonService Service;
         /// <summary>
         /// Constructor of Controller wich implement a IPersonService
@@ -27,32 +27,39 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             Service = service;
         }
-        /// <summary>
-        /// Function to GetAll Person
-        /// </summary>
         /// <returns>IEnumerable of Person</returns>
+        #region Swagger
+        [SwaggerOperation("Get All Person")]
+        [SwaggerResponse(200,"Return List of Person",typeof(Person))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(Service.GetAll().Select(P => P.ToApi()));
         }
-        /// <summary>
-        /// Function to Get one Person
-        /// </summary>
         /// <returns>IAction Result</returns>
+        #region Swagger
+        [SwaggerOperation("Return a Person")]
+        [SwaggerResponse(200,"Return one Movie",typeof(Person))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get([FromRoute,SwaggerParameter("Id of Person",Required = true)]int id)
         {
             return Ok(Service.Get(id).ToApi());
         }
-        /// <summary>
-        /// Function to create a new Person
-        /// </summary>
         /// <param name="newPerson">NewPersonForm</param>
         /// <returns>IAction Result</returns>
+        #region Swagger
+        [SwaggerOperation("New Person Form")]
+        [SwaggerResponse(200,"Id of Person Created",typeof(int))]
+        [SwaggerResponse(400,"Form is Invalid",typeof(ExceptionResponse))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpPost]
-        public IActionResult Create(NewPersonForm newPerson)
+        public IActionResult Create([FromBody,SwaggerRequestBody("New Person Form",Required = true)]NewPersonForm newPerson)
         {
             try
             {
@@ -61,16 +68,19 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             }
             catch
             {
-                return new BadRequestObjectResult(new { error="Form is invalid" });
+                return new BadRequestObjectResult(new ExceptionResponse() { Status = 400,Value = "Form is Invalid" });
             }
         }
-        /// <summary>
-        /// Function to update a Person
-        /// </summary>
         /// <param name="person">Person</param>
         /// <returns>IActionResult</returns>
+        #region Swagger
+        [SwaggerOperation("Update Person")]
+        [SwaggerResponse(200, "Return bool : true if success", typeof(bool))]
+        [SwaggerResponse(400, "Form is invalid", typeof(ExceptionResponse))]
+        [SwaggerResponse(500, "Server Error")]
+        #endregion
         [HttpPut]
-        public IActionResult Update(Person person)
+        public IActionResult Update([FromBody, SwaggerRequestBody("Update Person Form",Required = true)]Person person)
         {
             try
             {
@@ -78,17 +88,19 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             }
             catch
             {
-                return new BadRequestObjectResult(new { error = "Form is invalid" });
+                return new BadRequestObjectResult(new ExceptionResponse() { Status = 400, Value = "Form is Invalid" });
             }
         }
-        /// <summary>
-        /// Function to Get a Person with list of movie
-        /// </summary>
         /// <param name="id">int id of Person</param>
         /// <returns>IAction Result</returns>
+        #region Swagger
+        [SwaggerOperation("Get Person Movie")]
+        [SwaggerResponse(200,"Return a Movie by Person",typeof(PersonMovie))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
         [HttpGet]
         [Route("GetPersonMovie/{id}")]
-        public IActionResult GetPersonMovie(int id)
+        public IActionResult GetPersonMovie([FromRoute,SwaggerParameter("Id of Person",Required = true)]int id)
         {
             PersonMovie personMovie = new PersonMovie();
             personMovie.Person = Service.Get(id).ToApiShort();

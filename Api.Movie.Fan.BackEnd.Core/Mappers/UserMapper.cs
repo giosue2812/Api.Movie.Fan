@@ -25,7 +25,8 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
             return new UserShort
             {
                 Email = entity.Email,
-                Pseudo = entity.Pseudo
+                Pseudo = entity.Pseudo,
+                IsAdmin = entity.IsAdmin
             };
         }
         /// <summary>
