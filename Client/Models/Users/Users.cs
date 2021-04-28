@@ -13,5 +13,6 @@ namespace Client.Models.Users
         public string Pseudo { get; set; }
         public DateTime BirthDate { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsActive { get; set; }
     }
 }

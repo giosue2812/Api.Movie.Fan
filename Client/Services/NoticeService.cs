@@ -62,6 +62,15 @@ namespace Client.Services
             return Repository.Update(entity.ToDal());
         }
         /// <summary>
+        /// Function to switch a active Notice
+        /// </summary>
+        /// <param name="id">int id of notice</param>
+        /// <returns>true if success</returns>
+        public bool SwitchActiveNotice(int id)
+        {
+            return Repository.SwitchActiveNotice(id);
+        }
+        /// <summary>
         /// Function to get Notice by Movie
         /// </summary>
         /// <param name="id">int id of Movie</param>

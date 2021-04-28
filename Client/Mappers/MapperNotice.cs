@@ -73,6 +73,7 @@ namespace Client.Mappers
             if (entity == null) return null;
             return new NoticeByUser
             {
+                IsActive = entity.IsActive,
                 Content = entity.Content,
                 DateNotice = entity.DateNotice,
                 Title = entity.Title
@@ -88,6 +89,7 @@ namespace Client.Mappers
             if (entity == null) return null;
             return new NoticeByMovie
             {
+                IsActive = entity.IsActive,
                 Content = entity.Content,
                 DateNotice = entity.DateNotice,
                 Email = entity.Email

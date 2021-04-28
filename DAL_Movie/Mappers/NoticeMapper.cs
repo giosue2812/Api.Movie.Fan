@@ -42,11 +42,12 @@ namespace DAL_Movie.Mappers
             if (record == null) return null;
             return new NoticeByUser
             {
+                IsActive = (bool)record["IsActive"],
                 Title = (string)record["Title"],
                 Content = (string)record["Content"],
                 DateNotice = (DateTime)record["DateNotice"]
             };
-        }
+        }   
         /// <summary>
         /// Function to convert NoticeByMovie from database to DAL NoticeByMovie
         /// </summary>
@@ -57,6 +58,7 @@ namespace DAL_Movie.Mappers
             if (record == null) return null;
             return new NoticeByMovie
             {
+                IsActive = (bool)record["IsActive"],
                 Email = (string)record["Email"],
                 Content = (string)record["Content"],
                 DateNotice = (DateTime)record["DateNotice"]

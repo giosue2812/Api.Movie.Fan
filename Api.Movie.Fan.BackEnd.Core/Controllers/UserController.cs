@@ -50,14 +50,14 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         /// <returns>IActionResult</returns>
         #region Swagger
         [SwaggerOperation("Get User")]
-        [SwaggerResponse(200,"Return an User",typeof(UserShort))]
+        [SwaggerResponse(200,"Return an User",typeof(Api.Movie.Fan.BackEnd.Core.Models.User.Users))]
         [SwaggerResponse(500,"Server Error")]
         #endregion
         [HttpGet]
         [Route("{id}")]
         public IActionResult Get([FromRoute,SwaggerParameter("Id of User",Required = true)]int id)
         {
-            return Ok(Service.Get(id).ToApi());
+            return Ok(Service.Get(id).ToApiUser());
         }
         /// <param name="newUser">NewUserForm</param>
         /// <returns>IActionResult</returns>
@@ -109,7 +109,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [SwaggerResponse(200,"bool : true if success",typeof(bool))]
         [SwaggerResponse(500,"Server Error")]
         #endregion
-        [HttpPut]
+        [HttpGet]
         [Route("SwitchUser/{id}")]
         public IActionResult SwitchUser([FromRoute,SwaggerParameter("Id of User",Required = true)]int id)
         {
@@ -123,7 +123,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         [SwaggerResponse(200,"bool: true if succeess",typeof(bool))]
         [SwaggerResponse(500,"Server Error")]
         #endregion
-        [HttpPut]
+        [HttpGet]
         [Route("SwitchActiveUser/{id}")]
         public IActionResult SwitchActiveUser([FromRoute,SwaggerParameter("Id of User",Required = true)]int id)
         {

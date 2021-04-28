@@ -10,5 +10,6 @@ namespace DAL_Movie.ModelView.Person
     {
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public string Role { get; set; }
     }
 }

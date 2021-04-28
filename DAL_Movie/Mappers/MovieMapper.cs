@@ -53,7 +53,7 @@ namespace DAL_Movie.Mappers
         /// <summary>
         /// Function to Map a IDataRecord to MovieCasting
         /// </summary>
-        /// <param name="record"></param>
+        /// <param name="record">IDataRecord</param>
         /// <returns>MovieCasting</returns>
         public static MovieCasting ToDalMovieCasting(this IDataRecord record)
         {

@@ -4,6 +4,7 @@
 	@IdMovie int
 AS
 BEGIN
-	INSERT INTO [dbo].[Casting] ([Role],[IdMovie],[IdPerson]) OUTPUT [inserted].[IdMovie] 
+	SET NOCOUNT ON;
+	INSERT INTO [dbo].[Casting] ([Role],[IdMovie],[IdPerson]) OUTPUT [inserted].[IdCasting] 
 	VALUES(@Role,@IdMovie,@IdPerson)
 END

@@ -55,7 +55,7 @@ namespace Client.Mappers
             };
         }
         /// <summary>
-        /// Functio static to Convert an object DAL.ModelView.Person.PersonMovie from DAL to Client PersonMovie
+        /// Function static to Convert an object DAL.ModelView.Person.PersonMovie from DAL to Client PersonMovie
         /// </summary>
         /// <param name="entity">DAL DAL.ModelView.Person.PersonMovie</param>
         /// <returns>Client PersonMovie</returns>
@@ -63,6 +63,21 @@ namespace Client.Mappers
         {
             if (entity == null) return null;
             return new PersonMovie
+            {
+                Title = entity.Title,
+                Synopsis = entity.Synopsis,
+                Role = entity.Role
+            };
+        }
+        /// <summary>
+        /// Function static to convert an object DAL PersonProdWritMovie to Client PersonProdWritMovie
+        /// </summary>
+        /// <param name="entity">DAL PersonProdWritMovie</param>
+        /// <returns>PersonProdWritMovie</returns>
+        public static PersonProdWritMovie ToClient(this DAL.ModelView.Person.PersonProdWritMovie entity)
+        {
+            if (entity == null) return null;
+            return new PersonProdWritMovie
             {
                 Title = entity.Title,
                 Synopsis = entity.Synopsis

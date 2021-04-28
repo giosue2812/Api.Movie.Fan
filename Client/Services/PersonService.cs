@@ -68,5 +68,14 @@ namespace Client.Services
         {
             return Repository.GetPersonMovie(id).Select(PM => PM.ToClient());
         }
+        /// <summary>
+        /// Function to get a list of movie by person (Product or Writer)
+        /// </summary>
+        /// <param name="id">int id of person</param>
+        /// <returns>PersonProdWritMovie</returns>
+        public IEnumerable<PersonProdWritMovie> GetPersonProdWritMovies(int id)
+        {
+            return Repository.GetPersonProdWritMovies(id).Select(PM => PM.ToClient());
+        }
     }
 }

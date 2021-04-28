@@ -40,6 +40,21 @@ namespace DAL_Movie.Mappers
             return new PersonMovie
             {
                 Title = (string)record["Title"],
+                Synopsis = (string)record["Synopsis"],
+                Role = (string)record["Role"]
+            };
+        }
+        /// <summary>
+        /// Function to map a Idatarecord to PersonProdWritMovie
+        /// </summary>
+        /// <param name="record">IDatarecord</param>
+        /// <returns>PersonProdWriteMovie</returns>
+        public static PersonProdWritMovie ToDalPersonProdWriteMovie(this IDataRecord record)
+        {
+            if (record == null) return null;
+            return new PersonProdWritMovie
+            {
+                Title = (string)record["Title"],
                 Synopsis = (string)record["Synopsis"]
             };
         }

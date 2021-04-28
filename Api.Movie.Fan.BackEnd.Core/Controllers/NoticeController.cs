@@ -57,6 +57,19 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             return Ok(Service.Get(id).ToApi());
         }
+        /// <param name="id"></param>
+        /// <returns></returns>
+        #region Swagger
+        [SwaggerOperation("Switch active Notice")]
+        [SwaggerResponse(200,"Return true if success",typeof(bool))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
+        [HttpGet]
+        [Route("SwitchNoticeActive/{id}")]
+        public IActionResult SwitchActiveNotice([FromRoute,SwaggerParameter("Id of Notice",Required = true)]int id)
+        {
+            return Ok(Service.SwitchActiveNotice(id));
+        }
         #region Swagger
         [SwaggerOperation("Create Notice")]
         [SwaggerResponse(200,"Return id of Notice created",typeof(int))]

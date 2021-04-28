@@ -32,6 +32,13 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <returns>NoticeByUser</returns>
         IEnumerable<NoticeByUser> GetNoticeByUser(int id);
         /// <summary>
+        /// Function To Switch a notice
+        /// </summary>
+        /// <param name="id">int id of Notice</param>
+        /// <returns>true if success</returns>
+        bool SwitchActiveNotice(int id);
+
+        /// <summary>
         /// Function to update a Notice
         /// </summary>
         /// <param name="entity">Notice</param>

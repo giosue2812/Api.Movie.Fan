@@ -22,7 +22,7 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <summary>
         /// Function to return one Movie with of Director and Writer
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">int id of movie</param>
         /// <returns>MovieDirectorWriter</returns>
         MovieDirectorWriter GetMovieDirectorWriter(int id);
         /// <summary>
@@ -36,5 +36,11 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <param name="entity">Movie</param>
         /// <returns>bool: true if success</returns>
         bool Update(Movie entity);
+        /// <summary>
+        /// Function to add casting
+        /// </summary>
+        /// <param name="entity">AddCasting</param>
+        /// <returns>int of casting create</returns>
+        int AddCasting(AddCasting entity);
     }
 }

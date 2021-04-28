@@ -77,6 +77,15 @@ namespace Client.Services
             return Repository.Create(entity.ToDal());
         }
         /// <summary>
+        /// Function to addCasting
+        /// </summary>
+        /// <param name="entity">AddCasting</param>
+        /// <returns>int of created casting</returns>
+        public int AddCasting(AddCasting entity)
+        {
+            return Repository.AddCasting(entity.ToDal());
+        }
+        /// <summary>
         /// Update an exist movie
         /// </summary>
         /// <param name="entity">Movie</param>

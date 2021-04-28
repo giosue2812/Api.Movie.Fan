@@ -71,5 +71,16 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@IdPerson", id);
             return Connection.ExecuteReader(command, (PM) => PM.ToDalPersonMovie());
         }
+        /// <summary>
+        /// Function to get a list of movie by person (Producteur or Writer)
+        /// </summary>
+        /// <param name="id">int id of Producteur or Writer</param>
+        /// <returns>PersonProdWritMovie</returns>
+        public IEnumerable<PersonProdWritMovie>GetPersonProdWritMovies(int id)
+        {
+            Command command = new Command("PersonProdWritMovie", true);
+            command.AddParameter("@IdPerson", id);
+            return Connection.ExecuteReader(command, (PM) => PM.ToDalPersonProdWriteMovie());
+        }
     }
 }

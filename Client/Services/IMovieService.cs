@@ -19,7 +19,6 @@ namespace Client.Services
         /// <param name="id">int id of Movie</param>
         /// <returns>MovieDirectorWriter</returns>
         MovieDirectorWriter GetMovieDirectorWriter(int id);
-
         /// <summary>
         /// Function to get a movie casting
         /// </summary>
@@ -31,5 +30,11 @@ namespace Client.Services
         /// <param name="movie">Movie</param>
         /// <returns>bool:true if sucess</returns>
         bool Update(Movie movie);
+        /// <summary>
+        /// Function to addCasting
+        /// </summary>
+        /// <param name="entity">AddCasting</param>
+        /// <returns>int of created casting</returns>
+        int AddCasting(AddCasting entity);
     }
 }

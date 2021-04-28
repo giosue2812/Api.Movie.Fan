@@ -24,9 +24,22 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
             if (entity == null) return null;
             return new UserShort
             {
+                Id = entity.Id,
                 Email = entity.Email,
                 Pseudo = entity.Pseudo,
-                IsAdmin = entity.IsAdmin
+                IsAdmin = entity.IsAdmin,
+                IsActive = entity.IsActive
+            };
+        }
+        public static Api.Movie.Fan.BackEnd.Core.Models.User.Users ToApiUser(this CL.Users.Users entity)
+        {
+            if (entity == null) return null;
+            return new Api.Movie.Fan.BackEnd.Core.Models.User.Users
+            {
+                Id = entity.Id,
+                Email = entity.Email,
+                BirthDate = entity.BirthDate,
+                Pseudo = entity.Pseudo
             };
         }
         /// <summary>

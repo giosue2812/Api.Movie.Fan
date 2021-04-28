@@ -50,6 +50,22 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             return Ok(Service.Get(id).ToApi());
         }
+        #region Swagger
+        [SwaggerOperation("Return a list of movie by Person (Producteur or Writer)")]
+        [SwaggerResponse(200,"Return list",typeof(PersonMovieListProdWrit))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
+        ///<param name="id">int id of person</param>
+        ///<returns>IAction Result</returns>
+        [HttpGet]
+        [Route("MovieByProdWrit/{id}")]
+        public IActionResult GetProdWriterMovie([FromRoute,SwaggerParameter("Id of Person",Required = true)]int id)
+        {
+            PersonMovieListProdWrit personMovieListProdWrit = new PersonMovieListProdWrit();
+            personMovieListProdWrit.person = Service.Get(id).ToApi();
+            personMovieListProdWrit.personProdWritMovies = Service.GetPersonProdWritMovies(id).Select(PM => PM.ToApi());
+            return Ok(personMovieListProdWrit);
+        }
         /// <param name="newPerson">NewPersonForm</param>
         /// <returns>IAction Result</returns>
         #region Swagger

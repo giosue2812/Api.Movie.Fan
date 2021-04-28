@@ -30,21 +30,22 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.TokenJWT
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Secret));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
 
-            Claim[] claims = new[]
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
-                new Claim(ClaimTypes.Email,userShort.Email),
-                new Claim("Pseudo",userShort.Pseudo),
-                new Claim(ClaimTypes.Role,userShort.IsAdmin ? "Admin":"User")
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim("Id",userShort.Id.ToString()),
+                    new Claim(ClaimTypes.Email, userShort.Email),
+                    new Claim("Pseudo",userShort.Pseudo),
+                    new Claim(ClaimTypes.Role, userShort.IsAdmin ? "admin" : "user")
+                }),
+                Issuer = Issuer,
+                Audience = Audience,
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = credentials
             };
-
-            JwtSecurityToken token = new JwtSecurityToken(
-                    issuer: Secret,
-                    audience: Audience,
-                    claims: claims,
-                    expires: DateTime.Now.AddDays(1),
-                    signingCredentials: credentials);
-
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }

@@ -1,0 +1,28 @@
+﻿@using UIMovie.Model;
+@using System.Text.Json;
+@inject IHttpClientFactory factory 
+@page "/index";
+
+<h3>Index</h3>
+       
+
+    @foreach(var m in getMovie())
+            {
+                <p>@m.Title</p>
+            }
+
+@code {
+    private List<Movie> movies;
+
+    public IEnumerable<Movie> getMovie()
+    {
+        HttpClient client = factory.CreateClient("api");
+        using (HttpResponseMessage result = client.GetAsync("movie").Result)
+        {
+            result.EnsureSuccessStatusCode();
+            string json = result.Content.ReadAsStringAsync().Result;
+            return JsonSerializer.Deserialize<IEnumerable<Movie>>(json);
+
+        }
+    }
+}

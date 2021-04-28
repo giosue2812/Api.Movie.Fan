@@ -53,6 +53,19 @@ namespace DAL_Movie.Repositories
             return (int)Connection.ExecuteScalar(command);
         }
         /// <summary>
+        /// Function to add casting
+        /// </summary>
+        /// <param name="entity">AddCasting</param>
+        /// <returns>int of casting create</returns>
+        public int AddCasting(AddCasting entity)
+        {
+            Command command = new Command("AddCasting", true);
+            command.AddParameter("@Role", entity.Role);
+            command.AddParameter("@IdPerson", entity.IdPerson);
+            command.AddParameter("@IdMovie", entity.IdMovie);
+            return (int)Connection.ExecuteScalar(command);
+        }
+        /// <summary>
         /// Function to update a existing Movie
         /// </summary>
         /// <param name="entity">Entity Movie</param>
@@ -65,7 +78,7 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@YearRelease", entity.YearRelease);
             command.AddParameter("@Synopsis", entity.Synopsis);
             command.AddParameter("@Director", entity.Director);
-            command.AddParameter("Writer", entity.Writer);
+            command.AddParameter("@Writer", entity.Writer);
             return Connection.ExecuteNonQuery(command) == 1;
         }
         /// <summary>

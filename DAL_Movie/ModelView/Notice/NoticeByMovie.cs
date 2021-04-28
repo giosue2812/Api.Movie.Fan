@@ -8,6 +8,7 @@ namespace DAL_Movie.ModelView.Notice
 {
     public class NoticeByMovie
     {
+        public bool IsActive { get; set; }
         public string Email { get; set; }
         public string Content { get; set; }
         public DateTime DateNotice { get; set; }

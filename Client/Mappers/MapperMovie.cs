@@ -96,5 +96,20 @@ namespace Client.Mappers
                 Writer = entity.Writer
             };
         }
+        /// <summary>
+        /// Mapping to map a Client AddCasting to DAL AddCasting
+        /// </summary>
+        /// <param name="entity">SEV AddCasting</param>
+        /// <returns>DAM AddCasting</returns>
+        public static DAL.ModelView.Movie.AddCasting ToDal(this SEV.AddCasting entity)
+        {
+            if (entity == null) return null;
+            return new DAL.ModelView.Movie.AddCasting
+            {
+                Role = entity.Role,
+                IdMovie = entity.IdMovie,
+                IdPerson = entity.IdPerson
+            };
+        }
     }
 }

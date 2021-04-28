@@ -26,7 +26,7 @@ namespace DAL_Movie.Repositories
         /// </summary>
         public RepositoryBase()
         {
-            Connection = new Connection(SqlClientFactory.Instance, "Data Source=DESKTOP-0E0AMEL;Initial Catalog=Movie;Integrated Security=True;");
+            Connection = new Connection(SqlClientFactory.Instance, "Server=DESKTOP-0E0AMEL;Initial Catalog=Movie;Integrated Security=True;");
         }
         /// <summary>
         /// Function Abstract to return a TEntiy

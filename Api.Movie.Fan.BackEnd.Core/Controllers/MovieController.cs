@@ -10,17 +10,19 @@ using Api.Movie.Fan.BackEnd.Core.ResponseError;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Movie.Fan.BackEnd.Core.Controllers
-{
+{   
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class MovieController : ControllerBase
     {
         private IMovieService Service;
+        private IPersonService PersonService;
         /// <param name="service">IMovieService</param>
-        public MovieController(IMovieService service)
+        public MovieController(IMovieService service,IPersonService personService)
         {
             Service = service;
+            PersonService = personService;
         }
 
         /// <returns>IAction Result</returns>
@@ -95,7 +97,26 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
             movieCasting.Castings = Service.GetMovieCasting(id).Select(m => m.ToApi()).ToList();
             return Ok(movieCasting);
         }
-
+        #region Swagger
+        [SwaggerOperation("Add Casting")]
+        [SwaggerResponse(200,"Return id of casting created",typeof(int))]
+        [SwaggerResponse(400,"Form is invalid",typeof(ExceptionResponse))]
+        [SwaggerResponse(500,"Server Error")]
+        #endregion
+        [HttpPost]
+        [Route("AddCasting")]
+        public IActionResult AddCasting(
+            [FromBody,SwaggerRequestBody("Form to Add Casting",Required = true)]AddCasting addCasting)
+        {
+            try
+            {
+                return Ok(Service.AddCasting(addCasting.ToClient()));
+            }
+            catch
+            {
+                return new BadRequestObjectResult(new ExceptionResponse() { Status = 400, Value = "Form is invalid" });
+            }
+        }
         /// <param name="newMovie">NewMovieForm</param>
         /// <returns>IAction Result</returns>
         #region Swagger
@@ -109,7 +130,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             try
             {
-                return Ok(Service.Create(newMovie.ToApi()));
+                return Ok(Service.Create(newMovie.ToClient()));
             }
             catch
             {
@@ -129,7 +150,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Controllers
         {
             try
             {
-                return Ok(Service.Update(movie.ToApi()));
+                return Ok(Service.Update(movie.ToClient()));
             }
             catch
             {

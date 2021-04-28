@@ -98,5 +98,16 @@ namespace DAL_Movie.Repositories
             command.AddParameter("@IdMovie", id);
             return Connection.ExecuteReader(command, (NM) => NM.ToDalNoticeByMovie());
         }
+        /// <summary>
+        /// Function To Switch a notice
+        /// </summary>
+        /// <param name="id">int id of Notice</param>
+        /// <returns>true if success</returns>
+        public bool SwitchActiveNotice(int id)
+        {
+            Command command = new Command("SwitchActiveComment", true);
+            command.AddParameter("@IdNotice", id);
+            return Connection.ExecuteNonQuery(command) == 1;
+        }
     }
 }

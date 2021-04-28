@@ -28,6 +28,13 @@ namespace Client.Services
         /// <returns>NoticeByUser</returns>
         IEnumerable<NoticeByUser> GetNoticeByUsers(int id);
         /// <summary>
+        /// Function to switch a active Notice
+        /// </summary>
+        /// <param name="id">int id of notice</param>
+        /// <returns>true if success</returns>
+        bool SwitchActiveNotice(int id);
+
+        /// <summary>
         /// Function to update a Notice
         /// </summary>
         /// <param name="movie">Notice</param>

@@ -28,7 +28,7 @@ namespace Api.Movie.Fan.BackEnd.Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors();
             services.AddControllers();
             services.AddSingleton(typeof(TokenManager));
             services.AddSingleton<IMovieService, MovieService>();
@@ -41,17 +41,45 @@ namespace Api.Movie.Fan.BackEnd.Core
             services.AddSingleton<IAdminRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("admin", policy => policy.RequireRole("admin"));
+                options.AddPolicy("user", policy => policy.RequireRole("user", "admin"));
+            });
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(option =>
+                {
+                    option.RequireHttpsMetadata = false;
+                    option.SaveToken = true;
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = Configuration["Token:Issuer"],
+                        ValidateAudience = true,
+                        ValidAudience = Configuration["Token:Audience"],
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Secret"]))
+                    };
+                });
             services.AddSwaggerGen(c =>
             {
                 c.EnableAnnotations();
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "swagger.xml");
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "swagger.xml"); 
                 c.IncludeXmlComments(filePath);
                 c.DescribeAllParametersInCamelCase();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Film GioGio", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Description = "JWT Authorization header using the Bearer scheme"
@@ -71,30 +99,7 @@ namespace Api.Movie.Fan.BackEnd.Core
                     }
                 });
             });
-              
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("admin", policy => policy.RequireRole("admin"));
-                options.AddPolicy("user", policy => policy.RequireRole("user", "admin"));
-            });
-            services.AddAuthentication(option =>
-            {
-                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(option =>
-                {
-                    option.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = Configuration["Token:Issuer"],
-                        ValidateAudience = true,
-                        ValidAudience = Configuration["Token:Audience"],
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Secret"]))
-                    };
-                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,18 +107,18 @@ namespace Api.Movie.Fan.BackEnd.Core
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => 
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Film GioGio v1");
-                });
-                
+                app.UseDeveloperExceptionPage();                
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Film GioGio v1");
+            });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

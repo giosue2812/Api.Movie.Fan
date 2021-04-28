@@ -16,5 +16,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.Persons
         public string Title { get; set; }
         [SwaggerSchema("Synopsis of Movie")]
         public string Synopsis { get; set; }
+        [SwaggerSchema("Role played by actor")]
+        public string Role { get; set; }
     }
 }

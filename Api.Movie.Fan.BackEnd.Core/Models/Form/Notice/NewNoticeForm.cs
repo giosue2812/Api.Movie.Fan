@@ -15,7 +15,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.Form.Notice
     {
         [SwaggerSchema("Content of Notice")]
         [DataType(DataType.MultilineText)]
-        [MaxLength(30)]
+        [MaxLength(500)]
         public string Content { get; set; }
         [SwaggerSchema("Id of Movie")]
         public int IdMovie { get; set; }

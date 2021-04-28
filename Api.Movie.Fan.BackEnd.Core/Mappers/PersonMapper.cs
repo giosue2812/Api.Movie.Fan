@@ -64,7 +64,8 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
             return new AP.Persons.MovieByPerson
             {
                 Title = personMovie.Title,
-                Synopsis = personMovie.Synopsis
+                Synopsis = personMovie.Synopsis,
+                Role = personMovie.Role
             };
         }
         /// <summary>
@@ -79,6 +80,20 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
             {
                 FirstName = person.FirstName,
                 LastName = person.LastName
+            };
+        }
+        /// <summary>
+        /// Function static to Convert an object PersonProdWriterMovie from client to API PersonProdWritMovie
+        /// </summary>
+        /// <param name="person">Client PersonProdWritMovie</param>
+        /// <returns>API PersonProdWritMovie</returns>
+        public static AP.Persons.PersonProdWritMovie ToApi(this SEV.PersonProdWritMovie person)
+        {
+            if (person == null) return null;
+            return new AP.Persons.PersonProdWritMovie
+            {
+                Title = person.Title,
+                Synopsis = person.Synopsis
             };
         }
     }

@@ -15,6 +15,13 @@ namespace Client.Services
         /// <returns>PersonMovie</returns>
         IEnumerable<PersonMovie> GetPersonMovie(int id);
         /// <summary>
+        /// Function to get a list of movie by person (Product or Writer)
+        /// </summary>
+        /// <param name="id">int id of person</param>
+        /// <returns>PersonProdWritMovie</returns>
+        IEnumerable<PersonProdWritMovie> GetPersonProdWritMovies(int id);
+
+        /// <summary>
         /// Function to update a Movie
         /// </summary>
         /// <param name="movie">Movie</param>

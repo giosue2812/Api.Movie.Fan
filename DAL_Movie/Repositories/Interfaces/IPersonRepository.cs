@@ -21,6 +21,13 @@ namespace DAL_Movie.Repositories.Interfaces
         /// <returns>PersonMovie</returns>
         IEnumerable<PersonMovie> GetPersonMovie(int id);
         /// <summary>
+        /// Function to get a list of movie by person (Producteur or Writer)
+        /// </summary>
+        /// <param name="id">int id of Producteur or Writer</param>
+        /// <returns>PersonProdWritMovie</returns>
+        IEnumerable<PersonProdWritMovie> GetPersonProdWritMovies(int id);
+
+        /// <summary>
         /// Function to update a Person
         /// </summary>
         /// <param name="entity">Person</param>

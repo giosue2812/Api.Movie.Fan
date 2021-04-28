@@ -63,7 +63,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
         /// </summary>
         /// <param name="movie">API NewMovieForm</param>
         /// <returns>Client NewMovie</returns>
-        public static SEV.NewMovie ToApi(this AP.Form.Movies.NewMovieForm newMovie)
+        public static SEV.NewMovie ToClient(this AP.Form.Movies.NewMovieForm newMovie)
         {
             if (newMovie == null) return null;
             return new SEV.NewMovie()
@@ -76,11 +76,11 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
             };
         }
         /// <summary>
-        /// Functio static to Convert an object Movies API to Client Movie
+        /// Function static to Convert an object Movies API to Client Movie
         /// </summary>
         /// <param name="movie">API Movies</param>
         /// <returns>Client Movie</returns>
-        public static SEV.Movie ToApi(this AP.Movi.Movies movies)
+        public static SEV.Movie ToClient(this AP.Movi.Movies movies)
         {
             if (movies == null) return null;
             return new SEV.Movie()
@@ -91,6 +91,21 @@ namespace Api.Movie.Fan.BackEnd.Core.Mappers
                 YearRelease = movies.YearRelease,
                 Director = movies.Director,
                 Writer = movies.Writer
+            };
+        }
+        /// <summary>
+        /// Function to map a AP AddCasting to Client AddCasting
+        /// </summary>
+        /// <param name="addCasting">AP AddCasting</param>
+        /// <returns>Client AddCasting</returns>
+        public static SEV.AddCasting ToClient(this AP.Form.Movies.AddCasting addCasting)
+        {
+            if (addCasting == null) return null;
+            return new SEV.AddCasting
+            {
+                Role = addCasting.Role,
+                IdMovie = addCasting.IdMovie,
+                IdPerson = addCasting.IdPerson
             };
         }
     }

@@ -12,6 +12,8 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.Notice
     [SwaggerSchema(Required = new[] {"Notice By User"})]
     public class NoticeByUser
     {
+        [SwaggerSchema("Active notice")]
+        public bool IsActive { get; set; }
         [SwaggerSchema("Title of Movie")]
         public string Title { get; set; }
         [SwaggerSchema("Content of Notice")]

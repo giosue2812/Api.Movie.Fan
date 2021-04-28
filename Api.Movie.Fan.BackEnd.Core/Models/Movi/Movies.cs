@@ -12,7 +12,7 @@ namespace Api.Movie.Fan.BackEnd.Core.Models.Movi
     [SwaggerSchema(Required = new[] {"Movie"})]
     public class Movies
     {
-        [SwaggerSchema("Id of Movie",ReadOnly =true)]
+        [SwaggerSchema("Id of Movie")]
         public int Id { get; set; }
         [SwaggerSchema("Title of Movie")]
         public string Title { get; set; }
